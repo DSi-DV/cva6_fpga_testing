@@ -140,4 +140,24 @@ module axi_ram #(
       .rdata_o(axil_resp.r.data)
   );
 
+`ifdef SIMULATION
+
+  function automatic void write_mem(input logic [63:0] addr, input logic [7:0] data);
+    if (u_mem.VERIF_ONLY) begin
+      u_mem.g_vip.mem[addr] = data;
+    end else begin
+      // TODO
+    end
+  endfunction
+
+  function automatic logic [7:0] read_mem(input logic [63:0] addr);
+    if (u_mem.VERIF_ONLY) begin
+      return u_mem.g_vip.mem[addr];
+    end else begin
+      // TODO
+    end
+  endfunction
+
+`endif
+
 endmodule
