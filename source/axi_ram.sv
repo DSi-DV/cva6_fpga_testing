@@ -24,6 +24,8 @@ module axi_ram #(
 
   axi_req_t   axi_req;
   axi_resp_t  axi_resp;
+  axil_req_t  axil_req_pre_mem;
+  axil_resp_t axil_resp_pre_mem;
   axil_req_t  axil_req;
   axil_resp_t axil_resp;
 
@@ -92,7 +94,27 @@ module axi_ram #(
       .test_i    ('0),
       .slv_req_i (axi_req),
       .slv_resp_o(axi_resp),
-      .mst_req_o (axil_req),
+      .mst_req_o (axil_req_pre_mem),
+      .mst_resp_i(axil_resp_pre_mem)
+  );
+
+  axi_fifo #(
+      .Depth      (32'd1),
+      .FallThrough(1'b0),
+      .aw_chan_t  (axil_aw_chan_t),
+      .w_chan_t   (axil_w_chan_t),
+      .b_chan_t   (axil_b_chan_t),
+      .ar_chan_t  (axil_ar_chan_t),
+      .r_chan_t   (axil_r_chan_t),
+      .axi_req_t  (axil_req_t),
+      .axi_resp_t (axil_resp_t)
+  ) u_fifo (
+      .clk_i(clk_i),
+      .rst_ni(arst_ni),
+      .test_i('0),
+      .slv_req_i(axil_req_pre_mem),
+      .slv_resp_o(axil_resp_pre_mem),
+      .mst_req_o(axil_req),
       .mst_resp_i(axil_resp)
   );
 

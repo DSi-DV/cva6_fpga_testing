@@ -60,6 +60,7 @@ FLIST += ${ROOT_DIR}/source/axi_ram.sv
 FLIST += ${ROOT_DIR}/source/axi_rom.sv
 
 # axi_xbar
+FLIST += ${ROOT_DIR}/source/axi_fifo.sv
 FLIST += ${ROOT_DIR}/source/axi_id_prepend.sv
 FLIST += ${ROOT_DIR}/source/axi_mux.sv
 FLIST += ${ROOT_DIR}/source/addr_decode_dync.sv
