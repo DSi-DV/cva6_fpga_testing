@@ -134,7 +134,6 @@ FLIST += ${ROOT_DIR}/source/ariane_tb.sv
 
 # soc
 FLIST += ${ROOT_DIR}/source/soc.sv
-FLIST += ${ROOT_DIR}/source/axi_ram_tb.sv
 
 ####################################################################################################
 # MEMORY
