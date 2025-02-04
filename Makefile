@@ -134,6 +134,7 @@ FLIST += ${ROOT_DIR}/source/ariane_tb.sv
 
 # soc
 FLIST += ${ROOT_DIR}/source/soc.sv
+FLIST += ${ROOT_DIR}/source/axi_ram_tb.sv
 
 ####################################################################################################
 # MEMORY
@@ -194,8 +195,16 @@ simulate: build/build_$(TOP)
 	@echo "--testplusarg TESTNAME=$(TESTNAME)" > build/xsim_args
 	@cd build; xsim $(TOP) -f xsim_args -runall -log ../log/$(TOP)_$(TESTNAME).txt
 
+.PHONY: simulate_gui
+simulate_gui: build/build_$(TOP)
+	@echo "--testplusarg TESTNAME=$(TESTNAME)" > build/xsim_args
+	@cd build; xsim $(TOP) -f xsim_args -gui
+
 .PHONY: run
 run: clean simulate
+
+.PHONY: run_gui
+run_gui: clean simulate_gui
 
 .PHONY: print_logo
 print_logo:
